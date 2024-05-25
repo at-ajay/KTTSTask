@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">KTTS Task</string>
+
+    <!-- Auth -->
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="sign_in_to_continue">Login to continue</string>
+    <string name="forgot_password">Forget Password</string>
+    <string name="create">Create</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="registered_email">Registered Email</string>
+    <string name="txt_continue">Continue</string>
+    <string name="change_password">Change Password</string>
+    <string name="repeat_new_password">Repeat New Password</string>
+    <string name="new_password">New Password</string>
+
+</resources>
