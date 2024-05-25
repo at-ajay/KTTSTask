@@ -10,5 +10,10 @@ class User: RealmObject {
     var fullName: String = ""
     var emailAddress: String = ""
     var password: String = ""
+    var isAuthenticated: Boolean = false
 
+}
+
+class LoggedInUser: RealmObject {
+    var userId: ObjectId? = null
 }

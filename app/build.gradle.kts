@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.datastore.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,5 +75,8 @@ dependencies {
 
     //Realm
     implementation(libs.realm.kotlin)
+
+    //Datastore
+    implementation(libs.androidx.datastore.preferences)
 
 }

@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kttstask.App
+import com.kttstask.data.models.LoggedInUser
 import com.kttstask.data.models.User
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.ext.query
@@ -18,9 +19,16 @@ class AuthViewModel: ViewModel() {
                 this.fullName = name
                 this.emailAddress = email
                 this.password = password
+                this.isAuthenticated = true
+            }
+
+            val loggedInUser = LoggedInUser().apply {
+                this.userId = user._id
             }
 
             copyToRealm(user)
+            copyToRealm(loggedInUser)
+            App.userId = user._id
         }
     }
 
@@ -29,6 +37,23 @@ class AuthViewModel: ViewModel() {
             query = "emailAddress == $0 && password == $1",
             args = arrayOf(email, password)
         ).find()
+
+        val loggedInUser = App.realm.query<LoggedInUser>().find().first()
+
+        if (userSearchResult.size > 0) {
+            viewModelScope.launch {
+                App.realm.write {
+                    findLatest(userSearchResult.first())?.let {
+                        it.isAuthenticated = true
+                    }
+
+                    findLatest(loggedInUser)?.let {
+                        it.userId = userSearchResult.first()._id
+                    }
+                }
+            }
+            App.userId = userSearchResult.first()._id
+        }
 
         return userSearchResult.size > 0
     }
