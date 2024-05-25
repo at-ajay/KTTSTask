@@ -18,4 +18,18 @@
     <string name="repeat_new_password">Repeat New Password</string>
     <string name="new_password">New Password</string>
 
+    <!-- Validations -->
+    <string name="err_empty_name">Name cannot be empty</string>
+    <string name="err_invalid_name">Name is invalid</string>
+
+    <string name="err_empty_email">Email cannot be empty</string>
+    <string name="err_invalid_email">Please enter a valid email</string>
+    <string name="err_duplicate_email">Email already exists</string>
+    <string name="err_email_not_exists">Email does not exists</string>
+
+    <string name="err_empty_password">Password cannot be empty</string>
+    <string name="err_password_length">Password must contain at least 8 characters</string>
+    <string name="err_password_not_matched">Passwords are not matched</string>
+    <string name="err_same_as_old_password">Password cannot be same as old password</string>
+
 </resources>
