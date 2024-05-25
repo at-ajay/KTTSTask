@@ -8,16 +8,11 @@ import com.kttstask.databinding.FragmentCreateAccountBinding
 
 class CreateAccountFragment: Fragment(R.layout.fragment_create_account) {
 
-    private var createAccountBinding: FragmentCreateAccountBinding? = null
+    private lateinit var createAccountBinding: FragmentCreateAccountBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createAccountBinding = FragmentCreateAccountBinding.bind(view)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        createAccountBinding = null
     }
 
 }

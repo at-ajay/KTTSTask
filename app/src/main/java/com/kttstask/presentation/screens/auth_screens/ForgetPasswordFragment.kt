@@ -8,16 +8,11 @@ import com.kttstask.databinding.FragmentForgetPasswordBinding
 
 class ForgetPasswordFragment: Fragment(R.layout.fragment_forget_password) {
 
-    private var forgetPasswordBinding: FragmentForgetPasswordBinding? = null
+    private lateinit var forgetPasswordBinding: FragmentForgetPasswordBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         forgetPasswordBinding = FragmentForgetPasswordBinding.bind(view)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        forgetPasswordBinding = null
     }
 
 }
