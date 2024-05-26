@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val isUserDataAvailable = App.realm.query<User>().find().size > 0
+        val isUserDataAvailable = App.realm.query<User>("isAuthenticated == $0", true).find().size > 0
         val startDestination = if (isUserDataAvailable) R.id.homeFragment else R.id.loginFragment
 
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

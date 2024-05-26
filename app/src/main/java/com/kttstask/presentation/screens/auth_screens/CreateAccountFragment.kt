@@ -44,10 +44,18 @@ class CreateAccountFragment: Fragment(R.layout.fragment_create_account) {
                 Toast.makeText(activity, "Account Created Successfully", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_createAccountFragment_to_homeFragment)
             } else {
-                createAccountBinding.fullName.error = getString(nameValidationResult.errorMsgId!!)
-                createAccountBinding.email.error = getString(emailValidationResult.errorMsgId!!)
-                createAccountBinding.password.error = getString(passwordValidationResult.errorMsgId!!)
-                createAccountBinding.repeatPassword.error = getString(repeatedPasswordValidationResult.errorMsgId!!)
+                nameValidationResult.errorMsgId?.let {
+                    createAccountBinding.fullName.error = getString(nameValidationResult.errorMsgId)
+                }
+                emailValidationResult.errorMsgId?.let {
+                    createAccountBinding.email.error = getString(emailValidationResult.errorMsgId)
+                }
+                passwordValidationResult.errorMsgId?.let {
+                    createAccountBinding.password.error = getString(passwordValidationResult.errorMsgId)
+                }
+                repeatedPasswordValidationResult.errorMsgId?.let {
+                    createAccountBinding.repeatPassword.error = getString(repeatedPasswordValidationResult.errorMsgId)
+                }
             }
         }
     }

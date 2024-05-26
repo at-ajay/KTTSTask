@@ -46,16 +46,28 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.kttstask.presentation.screens.home_screen.HomeFragment"
+        android:name="com.kttstask.presentation.screens.location_screens.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
+            app:destination="@id/mapFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.kttstask.presentation.screens.home_screen.MapFragment"
+        android:name="com.kttstask.presentation.screens.location_screens.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="selectedLocation"
+            app:argType="com.kttstask.data.models.Location" />
+        <argument
+            android:name="historyList"
+            app:argType="com.kttstask.data.models.Location[]" />
+    </fragment>
 </navigation>

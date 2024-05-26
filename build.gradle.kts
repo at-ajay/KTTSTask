@@ -3,6 +3,7 @@
 buildscript {
     dependencies {
         classpath(libs.secrets.gradle.plugin)
+        classpath(libs.androidx.navigation.safe.args.gradle.plugin)
     }
 }
 

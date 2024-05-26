@@ -58,8 +58,12 @@ class ForgetPasswordFragment: Fragment(R.layout.fragment_forget_password) {
                     findNavController().navigate(R.id.action_forgetPasswordFragment_to_loginFragment)
                 }
             } else {
-                forgetPasswordBinding.newPassword.error = getString(passwordValidationResult.errorMsgId!!)
-                forgetPasswordBinding.repeatNewPassword.error = getString(repeatedPasswordValidationResult.errorMsgId!!)
+                passwordValidationResult.errorMsgId?.let {
+                    forgetPasswordBinding.newPassword.error = getString(passwordValidationResult.errorMsgId)
+                }
+                repeatedPasswordValidationResult.errorMsgId?.let {
+                    forgetPasswordBinding.repeatNewPassword.error = getString(repeatedPasswordValidationResult.errorMsgId)
+                }
             }
         }
 

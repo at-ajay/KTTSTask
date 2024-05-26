@@ -31,5 +31,9 @@
     <string name="err_password_length">Password must contain at least 8 characters</string>
     <string name="err_password_not_matched">Passwords are not matched</string>
     <string name="err_same_as_old_password">Password cannot be same as old password</string>
+    <string name="no_location_history_available">No Location History Available</string>
+    <string name="location_history">Location History</string>
+    <string name="add_user">Add User</string>
+    <string name="stop_service_and_quit_app">Stop Service and Quit App</string>
 
 </resources>

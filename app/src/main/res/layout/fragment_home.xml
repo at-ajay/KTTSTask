@@ -4,16 +4,135 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.screens.home_screen.HomeFragment">
+    tools:context=".presentation.screens.location_screens.HomeFragment">
 
-    <Button
-        android:id="@+id/showMapBtn"
+    <androidx.cardview.widget.CardView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnProfile"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardElevation="0dp"
+        android:backgroundTint="#454545">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:id="@+id/tv_profile_char"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_list"
+        app:layout_constraintTop_toBottomOf="@id/btnProfile"
+        app:layout_constraintEnd_toEndOf="@id/btnProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="15dp"
+        android:layout_marginStart="20dp"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_recycler"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/add_user"
+                android:textSize="16sp"
+                android:id="@+id/add_new_user"
+                app:layout_constraintTop_toBottomOf="@id/user_recycler"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="10dp"
+                android:textColor="@color/onBackground"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textAllCaps="false"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Map"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/location_history"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/history_label"
+        app:layout_constraintTop_toBottomOf="@id/btnProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <ImageButton
+        android:id="@+id/refresh_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/transparent"
+        android:padding="5dp"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnProfile" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/location_history"
+        app:layout_constraintBottom_toTopOf="@id/quit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/history_label"
+        android:layout_margin="20dp"
+        android:visibility="visible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_location_history_available"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/tv_no_data"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp"
+        android:visibility="gone"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_service_and_quit_app"
+        app:cornerRadius="15dp"
+        android:id="@+id/quit_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

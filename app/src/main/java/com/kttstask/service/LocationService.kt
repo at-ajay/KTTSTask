@@ -27,6 +27,7 @@ import io.realm.kotlin.ext.realmListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 class LocationService: Service(), LocationListener {
@@ -54,11 +55,7 @@ class LocationService: Service(), LocationListener {
     }
 
     private fun requestLocationUpdates() {
-        val locationRequest = LocationRequest.create().apply {
-            interval = 15000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
+        val locationRequest = LocationRequest.Builder(15 * 60 * 1000).build()
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -103,37 +100,41 @@ class LocationService: Service(), LocationListener {
     }
 
     override fun onLocationChanged(location: Location) {
-        Log.d("Location Info", "${location.latitude} ${location.longitude}")
-        val locationDataSearchResult = App.realm.query<LocationInfo>(
-            query = "userId == $0",
-            args = arrayOf(App.userId)
-        ).find()
+
+        Log.i("DB Status", "Location data received with latitude : ${location.latitude}, longitude : ${location.longitude}")
 
         val locData = com.kttstask.data.models.Location().apply {
             this.time = System.currentTimeMillis()
             this.latitude = location.latitude
             this.longitude = location.longitude
         }
+        saveLocationToDB(locData)
 
-        scope.launch {
-            App.realm.write {
+    }
 
-                if (locationDataSearchResult.size > 0) {
-                    findLatest(locationDataSearchResult.first())?.let {
-                        it.locations.add(locData)
-                    }
-                    Log.d("DB Status", "Location Updated to DB. Time : ${locData.time}, Latitude : ${locData.latitude}, Longitude : ${locData.longitude}")
-                } else {
-                    val loc = LocationInfo().apply {
-                        this.userId = App.userId
-                        this.locations = realmListOf(locData)
-                    }
+    private fun saveLocationToDB(location: com.kttstask.data.models.Location) = scope.launch {
+        val locationDataSearchResult = App.realm.query<LocationInfo>(
+            query = "userId == $0",
+            args = arrayOf(App.userId)
+        ).find()
 
-                    copyToRealm(loc)
-                    Log.d("DB Status", "Entry Created for userId : ${App.userId}")
+        App.realm.write {
+            if (locationDataSearchResult.size > 0) {
+                findLatest(locationDataSearchResult.first())?.let {
+                    it.locations.add(location)
                 }
+                Log.d("DB Status", "Location Updated to DB. Time : ${location.time}, Latitude : ${location.latitude}, Longitude : ${location.longitude}")
+            } else {
+                val loc = LocationInfo().apply {
+                    this.userId = App.userId
+                    this.locations = realmListOf(location)
+                }
+
+                copyToRealm(loc)
+                Log.d("DB Status", "Entry Created for userId : ${App.userId}")
             }
         }
+
     }
 
 }

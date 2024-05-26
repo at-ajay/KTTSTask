@@ -40,8 +40,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     Toast.makeText(requireActivity(), "Invalid credentials / User not available", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                loginBinding.email.error = getString(emailValidationResult.errorMsgId!!)
-                loginBinding.password.error = getString(passwordValidationResult.errorMsgId!!)
+                emailValidationResult.errorMsgId?.let {
+                    loginBinding.email.error = getString(emailValidationResult.errorMsgId)
+                }
+                passwordValidationResult.errorMsgId?.let {
+                    loginBinding.password.error = getString(passwordValidationResult.errorMsgId)
+                }
             }
         }
 
